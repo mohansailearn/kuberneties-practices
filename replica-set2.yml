@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet        
+metadata:
+  name: jenkins-rs
+  namespace: test-ns
+  labels:
+    app: ci-cd
+    author: mohan
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:        
+      app: ci-cd
+  template:
+    metadata:
+      labels:         
+        app: ci-cd
+        author: mohan
+    spec:
+      containers:
+        - name: myjenkins
+          image: jenkins/jenkins
+          ports:
+            - containerPort: 8080  
+              hostPort: 8080      
+...
